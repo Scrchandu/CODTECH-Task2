@@ -1,0 +1,48 @@
+def grade_tracker():
+    print("Welcome to the Student Grade Tracker!")
+
+    try:
+        num_subjects = int(input("Enter the number of subjects: "))
+        if num_subjects <= 0:
+            print("The number of subjects must be greater than 0.")
+            return
+    except ValueError:
+        print("Invalid input. Please enter a valid integer.")
+        return
+
+    grades = {}
+
+    for i in range(num_subjects):
+        subject = input(f"Enter the name of subject {i + 1}: ").strip()
+        try:
+            gpa = float(input(f"Enter the GPA (scale of 10) for {subject}: "))
+            if 0 <= gpa <= 10:
+                grades[subject] = gpa
+            else:
+                print("GPA should be between 0 and 10. Please try again.")
+                return
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+            return
+
+    if grades:
+        average_gpa = sum(grades.values()) / len(grades)
+        print(f"\nAverage GPA: {average_gpa:.2f}")
+
+        if average_gpa >= 9:
+            letter_grade = "A"
+        elif average_gpa >= 8:
+            letter_grade = "B"
+        elif average_gpa >= 7:
+            letter_grade = "C"
+        elif average_gpa >= 6:
+            letter_grade = "D"
+        else:
+            letter_grade = "F"
+
+        print(f"Letter Grade: {letter_grade}")
+    else:
+        print("No grades were entered.")
+
+# Run the grade tracker function
+grade_tracker()
